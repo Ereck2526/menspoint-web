@@ -1,0 +1,500 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo Black", "Archivo", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #0a0a09;
+  font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+.font-display {
+  font-family: "Archivo Black", "Archivo", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ── Ruido de textura ──────────────────────────────────────────────────── */
+.noise {
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.2'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+}
+
+/* ── Texto con contorno ────────────────────────────────────────────────── */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(244, 240, 232, 0.62);
+}
+
+/* ── Etiquetas y títulos ───────────────────────────────────────────────── */
+.eyebrow {
+  color: #f7a600;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-family: "Archivo Black", "Archivo", sans-serif;
+  font-size: clamp(2.8rem, 6vw, 6rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+}
+
+/* ── Hero: Nombre grande y protagonista ────────────────────────────────── */
+.hero-brand {
+  overflow: hidden;
+}
+
+.hero-brand-text {
+  display: block;
+  font-size: clamp(3.5rem, 10vw, 9rem);
+  line-height: 0.84;
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+  color: #f7a600;
+  /* Sin text-shadow para un look limpio y nítido */
+}
+
+/* ── Animaciones de entrada del Hero ──────────────────────────────────── */
+@keyframes hero-brand-in {
+  from {
+    opacity: 0;
+    transform: translateY(48px) skewY(2deg);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) skewY(0deg);
+    filter: blur(0);
+  }
+}
+
+@keyframes hero-eyebrow-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes hero-h1-in {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes hero-cta-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes line-expand {
+  from { transform: scaleX(0); transform-origin: left; }
+  to   { transform: scaleX(1); transform-origin: left; }
+}
+
+/* Clases de animación escalonada para el hero */
+.hero-animate-eyebrow {
+  animation: hero-eyebrow-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0s both;
+}
+.hero-animate-brand {
+  animation: hero-brand-in 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+.hero-animate-h1 {
+  animation: hero-h1-in 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
+}
+.hero-animate-cta {
+  animation: hero-cta-in 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both;
+}
+.hero-animate-line {
+  animation: line-expand 1.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+/* ── Cards de vidrio ───────────────────────────────────────────────────── */
+.glass-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.018));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  transition: border-color 300ms ease, box-shadow 300ms ease, transform 300ms ease;
+}
+
+/* Shimmer al hover en tarjetas de servicio */
+.glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(247,166,0,0.04) 50%, transparent 60%);
+  background-size: 200% 100%;
+  background-position: -100% 0;
+  transition: background-position 0.6s ease;
+  pointer-events: none;
+}
+
+.glass-card:hover::before {
+  background-position: 200% 0;
+}
+
+/* ── Tarjeta VIP ───────────────────────────────────────────────────────── */
+.vip-card {
+  background: linear-gradient(135deg, rgba(247, 166, 0, 0.08), rgba(247, 166, 0, 0.02));
+  border-color: rgba(247, 166, 0, 0.2);
+}
+
+/* ── Tarjetas del modal de reserva ─────────────────────────────────────── */
+.service-card {
+  position: relative;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.01));
+  transition: border-color 200ms ease, background 200ms ease, transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.service-card:hover {
+  border-color: rgba(247, 166, 0, 0.4);
+  background: linear-gradient(135deg, rgba(247, 166, 0, 0.06), rgba(247, 166, 0, 0.015));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.service-card--active {
+  border-color: #f7a600 !important;
+  background: linear-gradient(135deg, rgba(247, 166, 0, 0.12), rgba(247, 166, 0, 0.04)) !important;
+  box-shadow: 0 0 0 1px #f7a600, 0 8px 32px rgba(247, 166, 0, 0.15);
+}
+
+.service-card--vip {
+  background: linear-gradient(135deg, rgba(247, 166, 0, 0.07), rgba(247, 166, 0, 0.02));
+  border-color: rgba(247, 166, 0, 0.25);
+}
+
+.booking-modal {
+  max-height: 92vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(247, 166, 0, 0.3) transparent;
+}
+
+/* ── Galería ───────────────────────────────────────────────────────────── */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-rows: 120px;
+  gap: 12px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+}
+
+.gallery-item img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  filter: saturate(0.78) contrast(1.06);
+  transition: transform 700ms ease, filter 700ms ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.035);
+  filter: saturate(1) contrast(1);
+}
+
+.gallery-item-1 { grid-column: span 5; grid-row: span 5; }
+.gallery-item-2 { grid-column: span 3; grid-row: span 3; }
+.gallery-item-3 { grid-column: span 4; grid-row: span 4; }
+.gallery-item-4 { grid-column: span 3; grid-row: span 4; }
+.gallery-item-5 { grid-column: span 4; grid-row: span 3; }
+.gallery-item-6 { grid-column: span 5; grid-row: span 2; }
+
+/* ── Slider ────────────────────────────────────────────────────────────── */
+.slider-button {
+  display: grid;
+  height: 48px;
+  width: 48px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: transparent;
+  transition: 180ms ease;
+}
+
+.slider-button:hover {
+  border-color: #f7a600;
+  background: #f7a600;
+  color: #0a0a09;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Footer ────────────────────────────────────────────────────────────── */
+.footer-label {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ── Campos de formulario ──────────────────────────────────────────────── */
+.form-field {
+  height: 56px;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0 16px;
+  color: #f4f0e8;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 180ms ease;
+}
+
+.form-field:focus {
+  border-color: #f7a600;
+}
+
+.form-field::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.form-field option {
+  background: #141412;
+}
+
+/* ── Botón flotante de WhatsApp ────────────────────────────────────────── */
+.whatsapp-fab {
+  position: fixed;
+  bottom: 28px;
+  right: 24px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #25D366;
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 50px;
+  box-shadow: 0 8px 32px rgba(37, 211, 102, 0.45), 0 2px 8px rgba(0, 0, 0, 0.4);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
+  animation: fab-in 0.7s 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Anillo de pulso continuo en el FAB */
+.whatsapp-fab::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50px;
+  border: 2px solid rgba(37, 211, 102, 0.5);
+  animation: fab-pulse 2.4s ease-out 2.2s infinite;
+  pointer-events: none;
+}
+
+@keyframes fab-pulse {
+  0%   { transform: scale(1);    opacity: 0.8; }
+  70%  { transform: scale(1.18); opacity: 0; }
+  100% { transform: scale(1.18); opacity: 0; }
+}
+
+.whatsapp-fab:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 14px 40px rgba(37, 211, 102, 0.55), 0 2px 8px rgba(0, 0, 0, 0.4);
+  background: #1ebe5d;
+}
+
+.whatsapp-fab-label {
+  white-space: nowrap;
+}
+
+@keyframes fab-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ── Animaciones fade-in al hacer scroll ──────────────────────────────── */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-in-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Línea dorada animada del eyebrow ─────────────────────────────────── */
+.eyebrow-line {
+  display: inline-block;
+  height: 1px;
+  width: 40px;
+  background: #f7a600;
+  transform-origin: left;
+}
+
+/* ── Nav links con underline animado ──────────────────────────────────── */
+.nav-link {
+  position: relative;
+  transition: color 200ms ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #f7a600;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 250ms ease;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ── Botones CTA: efecto de fill animado ──────────────────────────────── */
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-gold::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  transform: translateX(-101%);
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+
+.btn-gold:hover::before {
+  transform: translateX(0);
+}
+
+.btn-gold > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 180px;
+    gap: 8px;
+  }
+
+  .gallery-item-1,
+  .gallery-item-4 {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .gallery-item-2,
+  .gallery-item-3,
+  .gallery-item-5,
+  .gallery-item-6 {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .whatsapp-fab-label {
+    display: none;
+  }
+
+  .whatsapp-fab {
+    padding: 16px;
+    border-radius: 50%;
+  }
+}
+
+/* ── Reducción de movimiento (accesibilidad) ───────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .gallery-item img,
+  .fade-in-section,
+  .hero-brand-text,
+  .whatsapp-fab {
+    transition: none;
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

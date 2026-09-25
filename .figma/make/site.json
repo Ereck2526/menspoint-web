@@ -1,0 +1,10 @@
+{
+  "description": "Men´s Point Barber Studio. Reserva tu cita, conoce nuestros servicios premium y cuida tu estilo en el Callao.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
