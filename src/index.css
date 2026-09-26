@@ -6,8 +6,17 @@
   --font-display: "Archivo Black", "Archivo", ui-sans-serif, system-ui, sans-serif;
 }
 
+/* ── Variables de paleta ───────────────────────────────────────────────── */
 :root {
-  color-scheme: dark;
+  --c-black:   #080808;
+  --c-dark:    #111111;
+  --c-mid:     #1a1a1a;
+  --c-grey:    #888888;
+  --c-light:   #e8e8e8;
+  --c-white:   #f5f5f5;
+  --c-pure:    #ffffff;
+  --c-accent:  #1a1a1a;   /* acento oscuro sobre secciones blancas */
+  color-scheme: dark light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
@@ -19,26 +28,28 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  background: #0a0a09;
+  background: var(--c-black);
+  color: var(--c-white);
   font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
 }
 
-button,
-input,
-select {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-}
-
-a {
-  text-decoration: none;
-}
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+a { text-decoration: none; }
 
 .font-display {
   font-family: "Archivo Black", "Archivo", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ── Secciones alternadas ─────────────────────────────────────────────── */
+.section-dark {
+  background: var(--c-black);
+  color: var(--c-white);
+}
+
+.section-white {
+  background: var(--c-pure);
+  color: var(--c-black);
 }
 
 /* ── Ruido de textura ──────────────────────────────────────────────────── */
@@ -54,9 +65,22 @@ a {
   -webkit-text-stroke: 1.5px rgba(244, 240, 232, 0.62);
 }
 
-/* ── Etiquetas y títulos ───────────────────────────────────────────────── */
+.text-outline-dark {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(0,0,0,0.35);
+}
+
+/* ── Eyebrow y títulos ─────────────────────────────────────────────────── */
 .eyebrow {
-  color: #f7a600;
+  color: var(--c-grey);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.eyebrow-dark {
+  color: #555;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.24em;
@@ -72,10 +96,8 @@ a {
   text-transform: uppercase;
 }
 
-/* ── Hero: Nombre grande y protagonista ────────────────────────────────── */
-.hero-brand {
-  overflow: hidden;
-}
+/* ── Hero ──────────────────────────────────────────────────────────────── */
+.hero-brand { overflow: hidden; }
 
 .hero-brand-text {
   display: block;
@@ -83,145 +105,103 @@ a {
   line-height: 0.84;
   letter-spacing: -0.07em;
   text-transform: uppercase;
-  color: #f7a600;
-  /* Sin text-shadow para un look limpio y nítido */
+  color: var(--c-white);
 }
 
 /* ── Animaciones de entrada del Hero ──────────────────────────────────── */
 @keyframes hero-brand-in {
-  from {
-    opacity: 0;
-    transform: translateY(48px) skewY(2deg);
-    filter: blur(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) skewY(0deg);
-    filter: blur(0);
-  }
+  from { opacity: 0; transform: translateY(48px) skewY(2deg); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0) skewY(0deg); filter: blur(0); }
 }
-
 @keyframes hero-eyebrow-in {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
-
 @keyframes hero-h1-in {
-  from {
-    opacity: 0;
-    transform: translateY(32px);
-    filter: blur(3px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
+  from { opacity: 0; transform: translateY(32px); filter: blur(3px); }
+  to   { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
-
 @keyframes hero-cta-in {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes line-expand {
   from { transform: scaleX(0); transform-origin: left; }
   to   { transform: scaleX(1); transform-origin: left; }
 }
 
-/* Clases de animación escalonada para el hero */
-.hero-animate-eyebrow {
-  animation: hero-eyebrow-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0s both;
-}
-.hero-animate-brand {
-  animation: hero-brand-in 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
-}
-.hero-animate-h1 {
-  animation: hero-h1-in 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
-}
-.hero-animate-cta {
-  animation: hero-cta-in 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both;
-}
-.hero-animate-line {
-  animation: line-expand 1.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
-}
+.hero-animate-eyebrow { animation: hero-eyebrow-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0s both; }
+.hero-animate-brand   { animation: hero-brand-in   1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both; }
+.hero-animate-h1      { animation: hero-h1-in      1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both; }
+.hero-animate-cta     { animation: hero-cta-in     1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both; }
+.hero-animate-line    { animation: line-expand      1.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; }
 
-/* ── Cards de vidrio ───────────────────────────────────────────────────── */
+/* ── Cards oscuras ─────────────────────────────────────────────────────── */
 .glass-card {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.018));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
   backdrop-filter: blur(16px);
-  transition: border-color 300ms ease, box-shadow 300ms ease, transform 300ms ease;
+  transition: border-color 300ms ease, transform 300ms ease;
 }
 
-/* Shimmer al hover en tarjetas de servicio */
 .glass-card::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(105deg, transparent 40%, rgba(247,166,0,0.04) 50%, transparent 60%);
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.03) 50%, transparent 60%);
   background-size: 200% 100%;
   background-position: -100% 0;
   transition: background-position 0.6s ease;
   pointer-events: none;
 }
+.glass-card:hover::before { background-position: 200% 0; }
 
-.glass-card:hover::before {
-  background-position: 200% 0;
+/* ── Cards claras (sobre fondo blanco) ─────────────────────────────────── */
+.light-card {
+  border: 1px solid rgba(0,0,0,0.1);
+  background: #f0f0f0;
+  transition: border-color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
+}
+.light-card:hover {
+  border-color: rgba(0,0,0,0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
 }
 
 /* ── Tarjeta VIP ───────────────────────────────────────────────────────── */
 .vip-card {
-  background: linear-gradient(135deg, rgba(247, 166, 0, 0.08), rgba(247, 166, 0, 0.02));
-  border-color: rgba(247, 166, 0, 0.2);
+  background: linear-gradient(135deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03));
+  border-color: rgba(255,255,255,0.18);
 }
 
 /* ── Tarjetas del modal de reserva ─────────────────────────────────────── */
 .service-card {
   position: relative;
   padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.01));
-  transition: border-color 200ms ease, background 200ms ease, transform 200ms ease,
-    box-shadow 200ms ease;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: linear-gradient(135deg, rgba(255,255,255,0.045), rgba(255,255,255,0.01));
+  transition: border-color 200ms ease, background 200ms ease, transform 200ms ease, box-shadow 200ms ease;
 }
-
 .service-card:hover {
-  border-color: rgba(247, 166, 0, 0.4);
-  background: linear-gradient(135deg, rgba(247, 166, 0, 0.06), rgba(247, 166, 0, 0.015));
+  border-color: rgba(255,255,255,0.3);
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
-
 .service-card--active {
-  border-color: #f7a600 !important;
-  background: linear-gradient(135deg, rgba(247, 166, 0, 0.12), rgba(247, 166, 0, 0.04)) !important;
-  box-shadow: 0 0 0 1px #f7a600, 0 8px 32px rgba(247, 166, 0, 0.15);
+  border-color: #ffffff !important;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)) !important;
+  box-shadow: 0 0 0 1px #fff, 0 8px 32px rgba(255,255,255,0.1);
 }
-
 .service-card--vip {
-  background: linear-gradient(135deg, rgba(247, 166, 0, 0.07), rgba(247, 166, 0, 0.02));
-  border-color: rgba(247, 166, 0, 0.25);
+  background: linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
+  border-color: rgba(255,255,255,0.2);
 }
 
 .booking-modal {
   max-height: 92vh;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgba(247, 166, 0, 0.3) transparent;
+  scrollbar-color: rgba(255,255,255,0.2) transparent;
 }
 
 /* ── Galería ───────────────────────────────────────────────────────────── */
@@ -231,24 +211,21 @@ a {
   grid-auto-rows: 120px;
   gap: 12px;
 }
-
 .gallery-item {
   position: relative;
   overflow: hidden;
   margin: 0;
 }
-
 .gallery-item img {
   height: 100%;
   width: 100%;
   object-fit: cover;
-  filter: saturate(0.78) contrast(1.06);
+  filter: saturate(0) contrast(1.1);
   transition: transform 700ms ease, filter 700ms ease;
 }
-
 .gallery-item:hover img {
   transform: scale(1.035);
-  filter: saturate(1) contrast(1);
+  filter: saturate(0.2) contrast(1.05);
 }
 
 .gallery-item-1 { grid-column: span 5; grid-row: span 5; }
@@ -264,58 +241,43 @@ a {
   height: 48px;
   width: 48px;
   place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(0,0,0,0.15);
   background: transparent;
+  color: #111;
   transition: 180ms ease;
 }
-
 .slider-button:hover {
-  border-color: #f7a600;
-  background: #f7a600;
-  color: #0a0a09;
+  border-color: #111;
+  background: #111;
+  color: #fff;
 }
 
-.no-scrollbar {
-  scrollbar-width: none;
+.slider-button-dark {
+  display: grid;
+  height: 48px;
+  width: 48px;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: transparent;
+  color: #fff;
+  transition: 180ms ease;
+}
+.slider-button-dark:hover {
+  border-color: #fff;
+  background: #fff;
+  color: #111;
 }
 
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
 
 /* ── Footer ────────────────────────────────────────────────────────────── */
 .footer-label {
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255,255,255,0.35);
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-}
-
-/* ── Campos de formulario ──────────────────────────────────────────────── */
-.form-field {
-  height: 56px;
-  width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 0;
-  background: rgba(255, 255, 255, 0.04);
-  padding: 0 16px;
-  color: #f4f0e8;
-  font-size: 13px;
-  outline: none;
-  transition: border-color 180ms ease;
-}
-
-.form-field:focus {
-  border-color: #f7a600;
-}
-
-.form-field::placeholder {
-  color: rgba(255, 255, 255, 0.35);
-}
-
-.form-field option {
-  background: #141412;
 }
 
 /* ── Botón flotante de WhatsApp ────────────────────────────────────────── */
@@ -331,7 +293,7 @@ a {
   color: #fff;
   padding: 14px 20px;
   border-radius: 50px;
-  box-shadow: 0 8px 32px rgba(37, 211, 102, 0.45), 0 2px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 32px rgba(37,211,102,0.45), 0 2px 8px rgba(0,0,0,0.4);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -340,73 +302,54 @@ a {
   transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
   animation: fab-in 0.7s 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
-
-/* Anillo de pulso continuo en el FAB */
 .whatsapp-fab::after {
   content: "";
   position: absolute;
   inset: -4px;
   border-radius: 50px;
-  border: 2px solid rgba(37, 211, 102, 0.5);
+  border: 2px solid rgba(37,211,102,0.5);
   animation: fab-pulse 2.4s ease-out 2.2s infinite;
   pointer-events: none;
 }
-
 @keyframes fab-pulse {
   0%   { transform: scale(1);    opacity: 0.8; }
   70%  { transform: scale(1.18); opacity: 0; }
   100% { transform: scale(1.18); opacity: 0; }
 }
-
 .whatsapp-fab:hover {
   transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 14px 40px rgba(37, 211, 102, 0.55), 0 2px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 14px 40px rgba(37,211,102,0.55), 0 2px 8px rgba(0,0,0,0.4);
   background: #1ebe5d;
 }
-
-.whatsapp-fab-label {
-  white-space: nowrap;
-}
-
+.whatsapp-fab-label { white-space: nowrap; }
 @keyframes fab-in {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(20px) scale(0.8); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* ── Animaciones fade-in al hacer scroll ──────────────────────────────── */
+/* ── Fade-in al hacer scroll ───────────────────────────────────────────── */
 .fade-in-section {
   opacity: 0;
   transform: translateY(32px);
   transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
               transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
+.fade-in-visible { opacity: 1; transform: translateY(0); }
 
-.fade-in-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ── Línea dorada animada del eyebrow ─────────────────────────────────── */
+/* ── Línea del eyebrow ─────────────────────────────────────────────────── */
 .eyebrow-line {
   display: inline-block;
   height: 1px;
   width: 40px;
-  background: #f7a600;
+  background: var(--c-white);
   transform-origin: left;
 }
 
-/* ── Nav links con underline animado ──────────────────────────────────── */
+/* ── Nav links ─────────────────────────────────────────────────────────── */
 .nav-link {
   position: relative;
   transition: color 200ms ease;
 }
-
 .nav-link::after {
   content: "";
   position: absolute;
@@ -414,41 +357,128 @@ a {
   left: 0;
   width: 100%;
   height: 1px;
-  background: #f7a600;
+  background: var(--c-white);
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 250ms ease;
 }
+.nav-link:hover::after { transform: scaleX(1); transform-origin: left; }
 
-.nav-link:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-/* ── Botones CTA: efecto de fill animado ──────────────────────────────── */
-.btn-gold {
+/* ── Slider Antes/Después ─────────────────────────────────────────────── */
+.before-after-container {
   position: relative;
   overflow: hidden;
+  cursor: col-resize;
+  user-select: none;
+  touch-action: none;
 }
-
-.btn-gold::before {
-  content: "";
+.before-after-container img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.before-after-after {
   position: absolute;
   inset: 0;
-  background: #ffffff;
-  transform: translateX(-101%);
-  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 0;
+  overflow: hidden;
+}
+.before-after-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #fff;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 10;
+}
+.before-after-handle {
+  position: absolute;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid rgba(0,0,0,0.15);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 11;
+  color: #111;
+  pointer-events: none;
 }
 
-.btn-gold:hover::before {
-  transform: translateX(0);
+/* ── FAQ Acordeón ─────────────────────────────────────────────────────── */
+.faq-item {
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  overflow: hidden;
 }
+.faq-item:first-child { border-top: 1px solid rgba(0,0,0,0.08); }
 
-.btn-gold > * {
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 500ms cubic-bezier(0.16, 1, 0.3, 1), 
+              padding 350ms ease;
+}
+.faq-answer.open { max-height: 400px; }
+
+/* ── Barber cards ─────────────────────────────────────────────────────── */
+.barber-card {
   position: relative;
-  z-index: 1;
+  overflow: hidden;
+  background: var(--c-dark);
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
 }
+.barber-card:hover { transform: translateY(-6px); }
+.barber-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  filter: saturate(0) contrast(1.05);
+  transition: filter 500ms ease, transform 600ms ease;
+}
+.barber-card:hover img {
+  filter: saturate(0.15) contrast(1.02);
+  transform: scale(1.03);
+}
+.barber-card-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 28px 24px 24px;
+  background: linear-gradient(0deg, rgba(0,0,0,0.92) 0%, transparent 100%);
+}
+
+/* ── Loyalty stamps ───────────────────────────────────────────────────── */
+.loyalty-stamp {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,0,0,0.15);
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  transition: transform 300ms ease, border-color 300ms ease, background 300ms ease;
+}
+.loyalty-stamp.filled {
+  background: #111;
+  border-color: #111;
+}
+.loyalty-stamp.empty {
+  background: #f0f0f0;
+}
+.loyalty-stamp:hover { transform: scale(1.1); }
+
+/* ── Review stars ─────────────────────────────────────────────────────── */
+.star-filled { color: #111; }
+.star-empty  { color: #ccc; }
 
 /* ── Responsive ────────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
@@ -457,44 +487,18 @@ a {
     grid-auto-rows: 180px;
     gap: 8px;
   }
-
-  .gallery-item-1,
-  .gallery-item-4 {
-    grid-column: span 2;
-    grid-row: span 2;
+  .gallery-item-1, .gallery-item-4 { grid-column: span 2; grid-row: span 2; }
+  .gallery-item-2, .gallery-item-3, .gallery-item-5, .gallery-item-6 {
+    grid-column: span 1; grid-row: span 1;
   }
-
-  .gallery-item-2,
-  .gallery-item-3,
-  .gallery-item-5,
-  .gallery-item-6 {
-    grid-column: span 1;
-    grid-row: span 1;
-  }
-
-  .whatsapp-fab-label {
-    display: none;
-  }
-
-  .whatsapp-fab {
-    padding: 16px;
-    border-radius: 50%;
-  }
+  .whatsapp-fab-label { display: none; }
+  .whatsapp-fab { padding: 16px; border-radius: 50%; }
 }
 
-/* ── Reducción de movimiento (accesibilidad) ───────────────────────────── */
+/* ── Accesibilidad ─────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .gallery-item img,
-  .fade-in-section,
-  .hero-brand-text,
-  .whatsapp-fab {
-    transition: none;
-    animation: none;
-    opacity: 1;
-    transform: none;
+  html { scroll-behavior: auto; }
+  .gallery-item img, .fade-in-section, .hero-brand-text, .whatsapp-fab {
+    transition: none; animation: none; opacity: 1; transform: none;
   }
 }
